@@ -7,7 +7,7 @@ import { theme } from './theme';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/react-template/">
+    <BrowserRouter basename="/goit-react-hw-06-phonebook/">
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
