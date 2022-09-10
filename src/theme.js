@@ -4,7 +4,7 @@ export const theme = {
     white: '#fff',
     text: '#2a2a2a',
     background: '#fff',
-    primary: '#07c',
+    primary: '#10907c',
     secondary: '#05a',
     accent: '#609',
     muted: '#f6f6f6',
@@ -33,6 +33,7 @@ export const theme = {
   borders: {
     none: 'none',
     normal: '1px solid',
+    bold: '3px solid',
   },
   radii: {
     none: '0',

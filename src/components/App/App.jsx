@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Toaster } from 'react-hot-toast';
-import { Route, Routes } from 'react-router-dom';
-import { GlobalStyle } from '../GlobalStyle';
-import { NotFound } from 'pages/NotFound';
-import { nanoid } from 'nanoid';
-import ContactForm from 'components/ContactForm';
-import Filter from 'components/Filter';
-import ContactList from 'components/ContactList';
+import { BsFillAspectRatioFill } from "react-icons/bs";
+import {nanoid} from 'nanoid'
+import toast, { Toaster } from 'react-hot-toast';
+import { GlobalStyle } from 'GlobalStyle';
+import {ContactForm, Box, ContactFilter, ContactList} from 'components';
+import {AppTitle, ContactsTitle} from 'components/App';
+
 
 const initContact = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -18,7 +17,7 @@ const initContact = [
 const CONTACTS = 'phonebook_contacts';
 
 export const App = () => {
-    const [contacts, setContacts] = useState(initContact);
+  const [contacts, setContacts] = useState(initContact);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export const App = () => {
     const exist = contacts.find(contact => contact.name.toLowerCase() === existName);
 
     if (exist) {
-      alert(`${name} is already in contacts.`);
+      toast(`${name} is already in contacts.`, {icon: <BsFillAspectRatioFill/>,});
     } else {
       setContacts([...contacts, { id, name, number }]);
     }
@@ -61,24 +60,20 @@ export const App = () => {
 
   const filteredContacts = onFilter(contacts, filter);
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={    <div className="phoneBook">
-      <h1>Phonebook</h1>
-      <ContactForm handleSubmit={onFormSubmit} />
+    <>
+      <Box p={5}>
+        <AppTitle>Phonebook</AppTitle>
+        <ContactForm handleSubmit={onFormSubmit} />
 
-      <h2>Contacts</h2>
-      <Filter
-        handleFilterChange={event => setFilter(event.currentTarget.value.toLowerCase())}
-        value={filter}
-      />
-      <ContactList contacts={filteredContacts} contactDelete={onContactDelete} />
-    </div>}>
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+        <ContactsTitle>Contacts</ContactsTitle>
+        <ContactFilter
+          handleFilterChange={event => setFilter(event.currentTarget.value.toLowerCase())}
+          value={filter}
+        />
+        <ContactList contacts={filteredContacts} contactDelete={onContactDelete} />
+      </Box>
       <GlobalStyle />
       <Toaster position="top-right" reverseOrder={false} />
-    </div>
+    </>
   );
 };

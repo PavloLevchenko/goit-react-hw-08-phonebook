@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
+import {Box} from 'components/Box';
 import PropTypes from 'prop-types';
-import s from './ContactForm.module.css';
+import {Label, Input, Button} from 'components/ContactForm';
 
-const ContactForm = ({ handleSubmit }) => {
+export const ContactForm = ({ handleSubmit }) => {
   const [name, setName] = useState(null);
   const [number, setNumber] = useState(null);
   return (
-    <form
-      className={s.form}
+    <Box as="form" width={[1, 1/2, 1/3]} display="grid"
       onSubmit={event => {
         event.preventDefault();
         handleSubmit({ event, name, number });
       }}
     >
-      <label className={s.form__label}>
+      <Label>
         Name
-        <input
-          className={s.form__input}
+        <Input
           onChange={event => setName(event.target.value)}
           type="text"
           name="name"
@@ -24,11 +23,10 @@ const ContactForm = ({ handleSubmit }) => {
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
         />
-      </label>
-      <label className={s.form__label}>
+      </Label>
+      <Label>
         Number
-        <input
-          className={s.form__input}
+        <Input
           onChange={event => setNumber(event.target.value)}
           type="tel"
           name="number"
@@ -36,14 +34,13 @@ const ContactForm = ({ handleSubmit }) => {
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
         />
-      </label>
-      <button className={s.form__btn} type="submit">
+      </Label>
+      <Button type="submit">
         Add contact
-      </button>
-    </form>
+      </Button>
+    </Box>
   );
 };
 ContactForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
-export default ContactForm;
