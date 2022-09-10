@@ -31,9 +31,10 @@ export const App = () => {
     localStorage.setItem(CONTACTS, JSON.stringify(contacts));
   }, [contacts]);
 
-  const onFormSubmit = ({ event, name, number }) => {
+  const onFormSubmit = (data, e) => {
+    const { name, number } = data;
     const id = nanoid();
-    event.target.reset();
+    e.target.reset();
     clearFilter();
 
     const existName = name.toLowerCase();
@@ -63,7 +64,7 @@ export const App = () => {
     <>
       <Box p={5}>
         <AppTitle>Phonebook</AppTitle>
-        <ContactForm handleSubmit={onFormSubmit} />
+        <ContactForm submit={onFormSubmit} />
 
         <ContactsTitle>Contacts</ContactsTitle>
         <ContactFilter
