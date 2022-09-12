@@ -9,6 +9,7 @@ import {addContact, setFilter} from 'redux/actions';
 export const ContactForm = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.contacts.loading);
   const contacts = useSelector((state) => state.contacts.items);
 
   const clearFilter = () => {
@@ -16,16 +17,16 @@ export const ContactForm = () => {
   };
 
   const onFormSubmit = (data, e) => {
-    const { name, number } = data;
+    const { name, phone } = data;
     e.target.reset();
-
+    
     const existName = name.toLowerCase();
     const exist = contacts.find(contact => contact.name.toLowerCase() === existName);
 
     if (exist) {
       toast(`${name} is already in contacts.`, {icon: <BsFillAspectRatioFill/>,});
     } else {
-      dispatch(addContact(name, number));
+      dispatch(addContact({name, phone}));
     }
     clearFilter();
   };
@@ -37,9 +38,9 @@ export const ContactForm = () => {
       </Label>
       <Label>
         Number
-        <Input {...register("number", { required: true })} type="tel" {...val.tel}/>
+        <Input {...register("phone", { required: true })} type="tel" {...val.tel}/>
       </Label>
-      <Button type="submit">
+      <Button type="submit" disabled={loading}>
         Add contact
       </Button>
     </Box>

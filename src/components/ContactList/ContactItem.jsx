@@ -4,7 +4,7 @@ import {Button} from './Button.styled';
 import {Item} from './Item.styled';
 import {removeContact, setFilter} from 'redux/actions';
 
-export const ContactItem = ({ id, name, number }) => {
+export const ContactItem = ({ id, name, phone }) => {
   const dispatch = useDispatch();
 
   const clearFilter = () => {
@@ -18,7 +18,7 @@ export const ContactItem = ({ id, name, number }) => {
 
   return (
   <Item>
-    {name} : {number}
+    {name} : {phone}
     <Button type="button" onClick={()=>onContactDelete(id)}>
       Delete
     </Button>
@@ -28,5 +28,5 @@ export const ContactItem = ({ id, name, number }) => {
 ContactItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
 };
