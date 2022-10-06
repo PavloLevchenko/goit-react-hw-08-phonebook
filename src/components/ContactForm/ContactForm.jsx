@@ -5,12 +5,13 @@ import toast from 'react-hot-toast';
 import {Box} from 'components/Box';
 import {Label, Input, Button, val} from 'components/ContactForm';
 import {addContact, setFilter} from 'redux/actions';
+import {selectContacts, selectLoadStatus} from 'redux/selectors';
 
 export const ContactForm = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.contacts.loading);
-  const contacts = useSelector((state) => state.contacts.items);
+  const loading = useSelector(selectLoadStatus);
+  const contacts = useSelector(selectContacts);
 
   const clearFilter = () => {
     dispatch(setFilter(''));

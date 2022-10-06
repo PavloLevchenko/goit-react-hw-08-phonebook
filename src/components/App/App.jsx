@@ -6,9 +6,10 @@ import { GlobalStyle } from 'GlobalStyle';
 import {ContactForm, Box, ContactFilter, ContactList} from 'components';
 import {AppTitle, ContactsTitle} from 'components/App';
 import {getContacts} from 'redux/actions';
+import {selectLoadStatus} from 'redux/selectors';
 
 export const App = () => {
-  const loading = useSelector((state) => state.contacts.loading);
+  const loading = useSelector(selectLoadStatus);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getContacts());
