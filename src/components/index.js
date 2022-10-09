@@ -1,5 +1,15 @@
-export {Box} from './Box';
-export {App} from './App';
-export {ContactForm} from './ContactForm';
-export {ContactFilter} from './ContactFilter';
-export {ContactList} from './ContactList'
+export { Box } from './Box';
+export { ContactForm } from './ContactForm';
+export { ContactFilter } from './ContactFilter';
+export { ContactList } from './ContactList';
+export { AppTitle } from './AppTitle';
+export { ContactsTitle } from './ContactsTitle';
+export { UserMenu } from './UserMenu';
+export { Loader } from './Loader';
+export { Header } from './Header';
+export { Layout } from './Layout';
+export { RegisterForm } from './RegisterForm';
+export { LoginForm } from './LoginForm';
+export { AuthNav, NavItem } from './AuthNav';
+export { App } from './App';
+export { PrivateRoute, RestrictedRoute } from './Routes';

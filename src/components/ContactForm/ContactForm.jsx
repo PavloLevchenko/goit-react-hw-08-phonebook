@@ -1,11 +1,11 @@
-import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
-import { BsFillAspectRatioFill } from "react-icons/bs";
+import { useForm } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
+import { BsFillAspectRatioFill } from 'react-icons/bs';
 import toast from 'react-hot-toast';
-import {Box} from 'components/Box';
-import {Label, Input, Button, val} from 'components/ContactForm';
-import {addContact, setFilter} from 'redux/actions';
-import {selectContacts, selectLoadStatus} from 'redux/selectors';
+import { Box } from 'components/Box';
+import { Label, Input, Button, val } from 'components/ContactForm';
+import { addContact, setFilter } from 'redux/contacts/actions';
+import { selectContacts, selectLoadStatus } from 'redux/contacts/selectors';
 
 export const ContactForm = () => {
   const { register, handleSubmit } = useForm();
@@ -18,28 +18,28 @@ export const ContactForm = () => {
   };
 
   const onFormSubmit = (data, e) => {
-    const { name, phone } = data;
+    const { name, number } = data;
     e.target.reset();
-    
+
     const existName = name.toLowerCase();
     const exist = contacts.find(contact => contact.name.toLowerCase() === existName);
 
     if (exist) {
-      toast(`${name} is already in contacts.`, {icon: <BsFillAspectRatioFill/>,});
+      toast(`${name} is already in contacts.`, { icon: <BsFillAspectRatioFill /> });
     } else {
-      dispatch(addContact({name, phone}));
+      dispatch(addContact({ name, number }));
     }
     clearFilter();
   };
   return (
-    <Box as="form" width={[1, 1/2, 1/3]} display="grid" onSubmit={handleSubmit(onFormSubmit)} >
+    <Box as="form" width={[1, 1 / 2, 1 / 3]} display="grid" onSubmit={handleSubmit(onFormSubmit)}>
       <Label>
         Name
-        <Input {...register("name", { required: true })} type="text" {...val.name}/>
+        <Input {...register('name', { required: true })} type="text" {...val.name} />
       </Label>
       <Label>
         Number
-        <Input {...register("phone", { required: true })} type="tel" {...val.tel}/>
+        <Input {...register('number', { required: true })} type="tel" {...val.tel} />
       </Label>
       <Button type="submit" disabled={loading}>
         Add contact

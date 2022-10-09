@@ -1,10 +1,17 @@
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import {Button} from './Button.styled';
-import {Item} from './Item.styled';
-import {removeContact, setFilter} from 'redux/actions';
+import { Button } from './Button.styled';
+import { Item } from './Item.styled';
+import { removeContact, setFilter } from 'redux/contacts/actions';
 
-export const ContactItem = ({ id, name, phone }) => {
+function decor(str, symbol) {
+  if(str.indexOf("-")===-1){
+    return str.match(/.{3}/g).join(symbol);
+  }
+  return str;
+}
+
+export const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
 
   const clearFilter = () => {
@@ -17,16 +24,17 @@ export const ContactItem = ({ id, name, phone }) => {
   };
 
   return (
-  <Item>
-    {name} : {phone}
-    <Button type="button" onClick={()=>onContactDelete(id)}>
-      Delete
-    </Button>
-  </Item>
-);}
+    <Item>
+      {name} : {decor(number, '-')}
+      <Button type="button" onClick={() => onContactDelete(id)}>
+        Delete
+      </Button>
+    </Item>
+  );
+};
 
 ContactItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
 };
