@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContactForm, Box, ContactFilter, ContactList, ContactsTitle, Loader } from 'components';
@@ -13,6 +14,9 @@ const Contacts = () => {
 
   return (
     <Box as="main" p={4}>
+      <Helmet>
+        <title>Contacts</title>
+      </Helmet>
       <ContactForm />
       <ContactsTitle>Contacts</ContactsTitle>
       <ContactFilter />
