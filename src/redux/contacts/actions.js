@@ -16,7 +16,7 @@ export const addContact = createAsyncThunk('contacts/add', async ({ name, number
   return data;
 });
 
-export const editContact = createAsyncThunk('contacts/edit', async ({id, name, number }) => {
+export const editContact = createAsyncThunk('contacts/edit', async ({ id, name, number }) => {
   const { data } = await axios.patch('/contacts/' + id, { name, number }).catch(function (error) {
     toast(error.message);
   });
@@ -24,10 +24,11 @@ export const editContact = createAsyncThunk('contacts/edit', async ({id, name, n
 });
 
 export const removeContact = createAsyncThunk('contacts/remove', async id => {
-  const { data } = await axios.delete('/contacts/' + id).catch(function (error) {
+  await axios.delete('/contacts/' + id).catch(function (error) {
     toast(error.message);
+    return;
   });
-  return data;
+  return { id };
 });
 
 export const setFilter = createAction('contacts/filter');
